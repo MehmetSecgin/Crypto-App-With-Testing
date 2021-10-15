@@ -19,9 +19,8 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     implementation group: 'io.springfox', name: 'springfox-boot-starter', version: "${spring_swagger_version}"
     implementation group: 'org.apache.commons', name: 'commons-collections4', version: "${apache_version}"
-    implementation group: 'org.json', name: 'json', version: '20210307'
-    implementation 'org.projectlombok:lombok:1.18.20'
-    implementation 'org.projectlombok:lombok:1.18.20'
+    implementation group: 'org.json', name: 'json', version:"${org_json_version}"
+
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
