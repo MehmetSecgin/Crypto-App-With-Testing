@@ -8,10 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class AlphaVantageApi {
@@ -23,7 +20,7 @@ public class AlphaVantageApi {
     private RegexFind regexFind;
 
     public List<MonthlyDataPoint> queryForMonthly() {
-        ResponseEntity<String> entity = restTemplate.getForEntity("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_MONTHLY&symbol=BTC&market=EUR&apikey=demo ", String.class);
+        ResponseEntity<String> entity = restTemplate.getForEntity("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_MONTHLY&symbol=BTC&market=USD&apikey=demo", String.class);
         if (entity.getStatusCode().is2xxSuccessful()) {
             //todo smt
         }
@@ -39,10 +36,12 @@ public class AlphaVantageApi {
         for (String key : timeSeriesMonthly.keySet()) {
             JSONObject dataPoint = timeSeriesMonthly.getJSONObject(key);
             List<String> matchList = regexFind.getStrings(dataPoint, "([14][a]. [\\w]+ [(]\\w+[)])");
+            String currency = matchList.get(1).substring(10,13);
             dataPointList.add(new MonthlyDataPoint(
+                    currency,
                     LocalDate.parse(key),
-                    dataPoint.getBigDecimal(matchList.get(1)),
-                    dataPoint.getBigDecimal(matchList.get(0)))
+                    dataPoint.getDouble(matchList.get(1)),
+                    dataPoint.getDouble(matchList.get(0)))
             );
         }
         return dataPointList;

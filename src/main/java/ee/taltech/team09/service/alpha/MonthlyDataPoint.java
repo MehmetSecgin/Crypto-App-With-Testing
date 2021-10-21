@@ -4,15 +4,27 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class MonthlyDataPoint {
-    private LocalDate date;
-    private BigDecimal open;
-    private BigDecimal close;
+    private String currencyName;
 
-    public MonthlyDataPoint(LocalDate date, BigDecimal open, BigDecimal close) {
+    private LocalDate date;
+    private Double open;
+    private Double close;
+
+    public MonthlyDataPoint(String currencyName,LocalDate date, Double open, Double close) {
+        this.currencyName = currencyName;
         this.date = date;
         this.open = open;
         this.close = close;
     }
+
+    public String getCurrencyName() {
+        return currencyName;
+    }
+
+    public void setCurrencyName(String currencyName) {
+        this.currencyName = currencyName;
+    }
+
 
     public LocalDate getDate() {
         return date;
@@ -22,19 +34,19 @@ public class MonthlyDataPoint {
         this.date = date;
     }
 
-    public BigDecimal getOpen() {
+    public Double getOpen() {
         return open;
     }
 
-    public void setOpen(BigDecimal open) {
+    public void setOpen(Double open) {
         this.open = open;
     }
 
-    public BigDecimal getClose() {
+    public Double getClose() {
         return close;
     }
 
-    public void setClose(BigDecimal close) {
+    public void setClose(Double close) {
         this.close = close;
     }
 }

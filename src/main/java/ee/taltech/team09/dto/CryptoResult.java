@@ -6,10 +6,21 @@ import java.time.LocalDate;
 
 public class CryptoResult {
 
+    private String currencyName;
+
+
     private LocalDate date;
-    private BigDecimal open;
-    private BigDecimal close;
-    private BigDecimal change;
+    private Double open;
+    private Double close;
+    private Double change;
+
+    public String getCurrencyName() {
+        return currencyName;
+    }
+
+    public void setCurrencyName(String currencyName) {
+        this.currencyName=currencyName;
+    }
 
     public LocalDate getDate() {
         return date;
@@ -19,27 +30,28 @@ public class CryptoResult {
         this.date = date;
     }
 
-    public BigDecimal getOpen() {
+    public Double getOpen() {
         return open;
     }
 
-    public void setOpen(BigDecimal open) {
+    public void setOpen(Double open) {
         this.open = open;
     }
 
-    public BigDecimal getClose() {
+    public Double getClose() {
         return close;
     }
 
-    public void setClose(BigDecimal close) {
+    public void setClose(Double close) {
         this.close = close;
     }
 
-    public BigDecimal getChange() {
+    public Double getChange() {
         return change;
     }
 
-    public void setChange(BigDecimal change) {
+    public void setChange(Double change) {
         this.change = change;
     }
+
 }
