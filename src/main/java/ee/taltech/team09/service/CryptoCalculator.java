@@ -19,6 +19,7 @@ public class CryptoCalculator {
         }
         MonthlyDataPoint monthlyDataPoint = monthlyDataPointOptional.get();
         CryptoResult cryptoResult = new CryptoResult();
+        cryptoResult.setCoinName(monthlyDataPoint.getCoinName());
         cryptoResult.setCurrencyName(monthlyDataPoint.getCurrencyName());
         cryptoResult.setDate(monthlyDataPoint.getDate());
         cryptoResult.setOpen(monthlyDataPoint.getOpen());

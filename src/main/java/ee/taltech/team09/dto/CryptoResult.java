@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class CryptoResult {
 
     private String currencyName;
-
+    private String coinName;
 
     private LocalDate date;
     private Double open;
@@ -20,6 +20,14 @@ public class CryptoResult {
 
     public void setCurrencyName(String currencyName) {
         this.currencyName=currencyName;
+    }
+
+    public String getCoinName() {
+        return coinName;
+    }
+
+    public void setCoinName(String coinName) {
+        this.coinName = coinName;
     }
 
     public LocalDate getDate() {

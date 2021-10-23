@@ -1,17 +1,18 @@
 package ee.taltech.team09.service.alpha;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class MonthlyDataPoint {
     private String currencyName;
+    private String coinName;
 
     private LocalDate date;
     private Double open;
     private Double close;
 
-    public MonthlyDataPoint(String currencyName,LocalDate date, Double open, Double close) {
+    public MonthlyDataPoint(String currencyName,String coinName,LocalDate date, Double open, Double close) {
         this.currencyName = currencyName;
+        this.coinName = coinName;
         this.date = date;
         this.open = open;
         this.close = close;
@@ -25,6 +26,13 @@ public class MonthlyDataPoint {
         this.currencyName = currencyName;
     }
 
+    public String getCoinName() {
+        return coinName;
+    }
+
+    public void setCoinName(String coinName) {
+        this.coinName = coinName;
+    }
 
     public LocalDate getDate() {
         return date;
