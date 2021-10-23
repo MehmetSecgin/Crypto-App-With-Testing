@@ -17,8 +17,8 @@ public class CryptoService {
     private AlphaVantageApi alphaVantageApi;
 
 
-    public CryptoResult result() {
-        List<MonthlyDataPoint> response = alphaVantageApi.queryForMonthly();
+    public CryptoResult result(String symbol,String market) {
+        List<MonthlyDataPoint> response = alphaVantageApi.queryForMonthly(symbol,market);
         return cryptoCalculator.calculate(response);
     }
 
