@@ -19,39 +19,34 @@ public class AlphaVantageApi {
 
     LocalDate date = LocalDate.now();
 
-    public List<MonthlyDataPoint> queryForMonthly(String symbol, String market) {
+    public MonthlyDataPoint queryForMonthly(String symbol, String market) {
         String body = alphaVantageClient.query(symbol, market);
         JSONObject jsonObject = new JSONObject(body);
         if (jsonObject.has("Error Message")) {
-            MonthlyDataPoint errorPoint = new MonthlyDataPoint(jsonObject.getString("Error Message"), "", LocalDate.now(), 1.0, 0.0);
-            return List.of(errorPoint);
-            //todo smt
+            return new MonthlyDataPoint(jsonObject.getString("Error Message"), "", LocalDate.now(), 1.0, 0.0);
         } else if (jsonObject.has("Note")) {
-            MonthlyDataPoint errorPoint = new MonthlyDataPoint(jsonObject.getString("Note"), "", LocalDate.now(), 1.0, 0.0);
-            return List.of(errorPoint);
+            return new MonthlyDataPoint(jsonObject.getString("Note"), "", LocalDate.now(), 1.0, 0.0);
+        } else if (jsonObject.toString().equals("{}")) {
         }
 
         JSONObject metaData = jsonObject.getJSONObject("Meta Data");
         JSONObject timeSeriesMonthly = jsonObject.getJSONObject("Time Series (Digital Currency Monthly)");
-        List<MonthlyDataPoint> dataPointList = new ArrayList<>();
+        MonthlyDataPoint returning = new MonthlyDataPoint();
         for (String key : timeSeriesMonthly.keySet()) {
             if (LocalDate.parse(key).equals(date)) {
                 JSONObject dataPoint = timeSeriesMonthly.getJSONObject(key);
                 List<String> matchListOpen = regexFind.getStrings(dataPoint, "([14][a]. [open]+ [(]\\w+[)])");
                 List<String> matchListClose = regexFind.getStrings(dataPoint, "([14][a]. [close]+ [(]\\w+[)])");
-                String currency = matchListOpen.get(0).substring(10, 13);
-                dataPointList.add(new MonthlyDataPoint(
-                        currency,
-                        metaData.getString("2. Digital Currency Code"),
-                        LocalDate.parse(key),
-                        dataPoint.getDouble(matchListOpen.get(0)),
-                        dataPoint.getDouble(matchListClose.get(0)))
-                );
+                returning.setCurrencyName(metaData.getString("4. Market Code"));
+                returning.setCoinName(metaData.getString("2. Digital Currency Code"));
+                returning.setDate(LocalDate.parse(key));
+                returning.setOpen(dataPoint.getDouble(matchListOpen.get(0)));
+                returning.setClose(dataPoint.getDouble(matchListClose.get(0)));
                 break;
             }
 
         }
-        return dataPointList;
+        return returning;
     }
 
 

@@ -14,6 +14,7 @@ public class CryptoResult {
     private Double close;
     private Double change;
 
+
     public String getCurrencyName() {
         return currencyName;
     }

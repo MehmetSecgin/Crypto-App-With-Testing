@@ -10,12 +10,20 @@ public class MonthlyDataPoint {
     private Double open;
     private Double close;
 
-    public MonthlyDataPoint(String currencyName,String coinName,LocalDate date, Double open, Double close) {
+    public MonthlyDataPoint(String currencyName, String coinName, LocalDate date, Double open, Double close) {
         this.currencyName = currencyName;
         this.coinName = coinName;
         this.date = date;
         this.open = open;
         this.close = close;
+    }
+
+    public MonthlyDataPoint(Double open, Double close) {
+        this.open = open;
+        this.close = close;
+    }
+
+    public MonthlyDataPoint() {
     }
 
     public String getCurrencyName() {
