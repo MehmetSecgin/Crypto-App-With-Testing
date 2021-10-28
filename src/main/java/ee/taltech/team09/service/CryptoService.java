@@ -6,7 +6,6 @@ import ee.taltech.team09.service.alpha.MonthlyDataPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class CryptoService {

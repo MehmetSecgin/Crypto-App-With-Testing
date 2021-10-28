@@ -1,6 +1,5 @@
 package ee.taltech.team09.dto;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
@@ -14,6 +13,15 @@ public class CryptoResult {
     private Double close;
     private Double change;
 
+    private String errorMessage;
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
     public String getCurrencyName() {
         return currencyName;

@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class AlphaVantageApi {
@@ -22,11 +20,13 @@ public class AlphaVantageApi {
     public MonthlyDataPoint queryForMonthly(String symbol, String market) {
         String body = alphaVantageClient.query(symbol, market);
         JSONObject jsonObject = new JSONObject(body);
+        MonthlyDataPoint monthlyDataPoint = new MonthlyDataPoint();
         if (jsonObject.has("Error Message")) {
-            return new MonthlyDataPoint(jsonObject.getString("Error Message"), "", LocalDate.now(), 1.0, 0.0);
+            monthlyDataPoint.setErrorMessage(jsonObject.getString("Error Message"));
+            return monthlyDataPoint;
         } else if (jsonObject.has("Note")) {
-            return new MonthlyDataPoint(jsonObject.getString("Note"), "", LocalDate.now(), 1.0, 0.0);
-        } else if (jsonObject.toString().equals("{}")) {
+            monthlyDataPoint.setErrorMessage(jsonObject.getString("Note"));
+            return monthlyDataPoint;
         }
 
         JSONObject metaData = jsonObject.getJSONObject("Meta Data");
@@ -35,16 +35,15 @@ public class AlphaVantageApi {
         for (String key : timeSeriesMonthly.keySet()) {
             if (LocalDate.parse(key).equals(date)) {
                 JSONObject dataPoint = timeSeriesMonthly.getJSONObject(key);
-                List<String> matchListOpen = regexFind.getStrings(dataPoint, "([14][a]. [open]+ [(]\\w+[)])");
-                List<String> matchListClose = regexFind.getStrings(dataPoint, "([14][a]. [close]+ [(]\\w+[)])");
+                String matchOpen = regexFind.getStrings(dataPoint, "([14][a]. [open]+ [(]\\w+[)])");
+                String matchClose = regexFind.getStrings(dataPoint, "([14][a]. [close]+ [(]\\w+[)])");
                 returning.setCurrencyName(metaData.getString("4. Market Code"));
                 returning.setCoinName(metaData.getString("2. Digital Currency Code"));
                 returning.setDate(LocalDate.parse(key));
-                returning.setOpen(dataPoint.getDouble(matchListOpen.get(0)));
-                returning.setClose(dataPoint.getDouble(matchListClose.get(0)));
+                returning.setOpen(dataPoint.getDouble(matchOpen));
+                returning.setClose(dataPoint.getDouble(matchClose));
                 break;
             }
-
         }
         return returning;
     }

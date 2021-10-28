@@ -7,3 +7,7 @@ app:
     key: DJ88371K8HCT55PW
     url: https://www.alphavantage.co/query
 
+spring:
+  jackson:
+    default-property-inclusion: non_null
+

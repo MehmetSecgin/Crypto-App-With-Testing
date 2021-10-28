@@ -10,6 +10,9 @@ public class MonthlyDataPoint {
     private Double open;
     private Double close;
 
+    private String errorMessage;
+
+
     public MonthlyDataPoint(String currencyName, String coinName, LocalDate date, Double open, Double close) {
         this.currencyName = currencyName;
         this.coinName = coinName;
@@ -24,6 +27,18 @@ public class MonthlyDataPoint {
     }
 
     public MonthlyDataPoint() {
+    }
+
+    public MonthlyDataPoint(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public String getCurrencyName() {
