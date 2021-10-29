@@ -1,0 +1,25 @@
+{
+  "Meta Data": {
+    "1. Information": "Monthly Prices and Volumes for Digital Currency",
+    "2. Digital Currency Code": "ETH",
+    "3. Digital Currency Name": "Ethereum",
+    "4. Market Code": "EUR",
+    "5. Market Name": "Euro",
+    "6. Last Refreshed": "2021-10-28 00:00:00",
+    "7. Time Zone": "UTC"
+  },
+  "Time Series (Digital Currency Monthly)": {
+    "2021-10-28": {
+      "1a. open (EUR)": "37785.99462300",
+      "1b. open (USD)": "43820.01000000",
+      "2a. high (EUR)": "57774.10000000",
+      "2b. high (USD)": "67000.00000000",
+      "3a. low (EUR)": "37322.95676900",
+      "3b. low (USD)": "43283.03000000",
+      "4a. close (EUR)": "50492.89916100",
+      "4b. close (USD)": "58556.07000000",
+      "5. volume": "1390772.54915000",
+      "6. market cap (USD)": "1390772.54915000"
+    }
+  }
+}
