@@ -1,7 +1,12 @@
 package ee.taltech.team09.service.alpha;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Getter
+@Setter
 public class MonthlyDataPoint {
     private String currencyName;
     private String coinName;
@@ -33,51 +38,5 @@ public class MonthlyDataPoint {
         this.errorMessage = errorMessage;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public String getCurrencyName() {
-        return currencyName;
-    }
-
-    public void setCurrencyName(String currencyName) {
-        this.currencyName = currencyName;
-    }
-
-    public String getCoinName() {
-        return coinName;
-    }
-
-    public void setCoinName(String coinName) {
-        this.coinName = coinName;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Double getOpen() {
-        return open;
-    }
-
-    public void setOpen(Double open) {
-        this.open = open;
-    }
-
-    public Double getClose() {
-        return close;
-    }
-
-    public void setClose(Double close) {
-        this.close = close;
-    }
 }
