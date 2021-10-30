@@ -3,7 +3,6 @@ package ee.taltech.team09.service.api;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ee.taltech.team09.dto.CryptoResult;
-import ee.taltech.team09.service.alpha.AlphaVantageApi;
 import ee.taltech.team09.service.alpha.AlphaVantageClient;
 import ee.taltech.team09.service.alpha.MonthlyDataPoint;
 import org.json.JSONObject;
@@ -19,7 +18,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,8 +28,6 @@ public class AlphaVantageApiTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private AlphaVantageApi alphaVantageApi;
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean
@@ -51,8 +47,9 @@ public class AlphaVantageApiTest {
         String content = mvcResult.getResponse().getContentAsString();
         List<CryptoResult> result = objectMapper.readValue(content, new TypeReference<>() {
         });
-        assertEquals(result.get(0).getErrorMessage(),NotePoint.getErrorMessage());
+        assertEquals(result.get(0).getErrorMessage(), NotePoint.getErrorMessage());
     }
+
     @Test
     void QueryWithErrorMessageReturnsErrorMessage() throws Exception {
         JSONObject dataPoint = new JSONObject(RegexFindTest.testData("testNOkErrorReturn.json"));
@@ -67,14 +64,15 @@ public class AlphaVantageApiTest {
         String content = mvcResult.getResponse().getContentAsString();
         List<CryptoResult> result = objectMapper.readValue(content, new TypeReference<>() {
         });
-        assertEquals(result.get(0).getErrorMessage(),NotePoint.getErrorMessage());
+        assertEquals(result.get(0).getErrorMessage(), NotePoint.getErrorMessage());
     }
+
     @Test
     void QueryWithReturnsSuccessful() throws Exception {
         String changeDate = RegexFindTest.testData("testOkReturn.json");
-        changeDate = changeDate.replace("\"2021-10-29\":" ,"\""+LocalDate.now()+"\":");
+        changeDate = changeDate.replace("\"2021-10-29\":", "\"" + LocalDate.now() + "\":");
         JSONObject dataPoint = new JSONObject(changeDate);
-        MonthlyDataPoint NotePoint = new MonthlyDataPoint("EUR","ETH",LocalDate.of(2021,10,28),37785.99462300,50492.89916100);
+        MonthlyDataPoint NotePoint = new MonthlyDataPoint("EUR", "ETH", LocalDate.of(2021, 10, 28), 37785.99462300, 50492.89916100);
         when(alphaVantageClient.query("ETH", "EUR")).thenReturn(dataPoint.toString());
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/crypto")
@@ -85,7 +83,7 @@ public class AlphaVantageApiTest {
         String content = mvcResult.getResponse().getContentAsString();
         List<CryptoResult> result = objectMapper.readValue(content, new TypeReference<>() {
         });
-        assertEquals(result.get(0).getCurrencyName(),NotePoint.getCurrencyName());
+        assertEquals(result.get(0).getCurrencyName(), NotePoint.getCurrencyName());
     }
 
 

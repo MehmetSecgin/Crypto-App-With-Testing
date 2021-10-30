@@ -38,8 +38,6 @@ public class CryptoControllerTest {
     private ObjectMapper objectMapper;
     @MockBean
     private AlphaVantageApi alphaVantageApi;
-    @MockBean
-    private AlphaVantageClient alphaVantageClient;
 
     @Test
     void cryptoControllerMockTest() throws Exception {
@@ -87,6 +85,7 @@ public class CryptoControllerTest {
         assertThat(result.get(0).getChange()).isCloseTo(900.0, within(0.0));
 
     }
+
     @Test
     void cryptoControllerMockTestReturnsNote() throws Exception {
         JSONObject dataPoint = new JSONObject(RegexFindTest.testData("testNOkNoteReturn.json"));

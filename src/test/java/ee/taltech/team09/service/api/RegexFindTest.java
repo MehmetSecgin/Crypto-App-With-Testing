@@ -24,15 +24,12 @@ public class RegexFindTest {
 
     @Autowired
     private RegexFind regexFind;
-    @Autowired
-    private ObjectMapper objectMapper;
+
 
     @Test
     void RegexFindTestReturnsOpenAndCloseValue() throws IOException {
         String regexPattern1 = "([14][a]. [open]+ [(]\\w+[)])";
-        String regexPattern2 = "([14][a]. [close]+ [(]\\w+[)])";
         JSONObject dataPoint = new JSONObject(testData("testOkReturn.json"));
-
         String result = regexFind.getStrings(dataPoint, regexPattern1);
 
         assertEquals("1a. open (EUR)", result);
@@ -40,7 +37,7 @@ public class RegexFindTest {
     }
 
     @Test
-    void RegexFindReturnsNullOnNoMatch() throws IOException{
+    void RegexFindReturnsNullOnNoMatch() throws IOException {
         String regexPattern1 = "([14][a]. [x]+ [(]\\w+[)])";
         JSONObject dataPoint = new JSONObject(testData("testOkReturn.json"));
         String result = regexFind.getStrings(dataPoint, regexPattern1);

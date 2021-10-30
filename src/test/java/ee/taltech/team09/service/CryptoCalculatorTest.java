@@ -7,13 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
-import static org.hamcrest.Matchers.samePropertyValuesAs;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -53,7 +48,7 @@ public class CryptoCalculatorTest {
     }
 
     @Test
-    void calculateEmptyReturnsNewResult(){
+    void calculateEmptyReturnsNewResult() {
         CryptoResult testResult = cryptoCalculator.calculate(null);
         assertThat(testResult).hasAllNullFieldsOrProperties();
     }
