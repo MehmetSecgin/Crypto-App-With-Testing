@@ -51,7 +51,7 @@ public class AlphaVantageApiTest {
         String content = mvcResult.getResponse().getContentAsString();
         List<CryptoResult> result = objectMapper.readValue(content, new TypeReference<>() {
         });
-        assertEquals(result.get(0).getCurrencyName(),NotePoint.getOpen());
+        assertEquals(result.get(0).getErrorMessage(),NotePoint.getErrorMessage());
     }
     @Test
     void QueryWithErrorMessageReturnsErrorMessage() throws Exception {
@@ -67,11 +67,13 @@ public class AlphaVantageApiTest {
         String content = mvcResult.getResponse().getContentAsString();
         List<CryptoResult> result = objectMapper.readValue(content, new TypeReference<>() {
         });
-        assertEquals(result.get(0).getCurrencyName(),NotePoint.getOpen());
+        assertEquals(result.get(0).getErrorMessage(),NotePoint.getErrorMessage());
     }
     @Test
     void QueryWithReturnsSuccessful() throws Exception {
-        JSONObject dataPoint = new JSONObject(RegexFindTest.testData("testOkReturn.json"));
+        String changeDate = RegexFindTest.testData("testOkReturn.json");
+        changeDate = changeDate.replace("\"2021-10-29\":" ,"\""+LocalDate.now()+"\":");
+        JSONObject dataPoint = new JSONObject(changeDate);
         MonthlyDataPoint NotePoint = new MonthlyDataPoint("EUR","ETH",LocalDate.of(2021,10,28),37785.99462300,50492.89916100);
         when(alphaVantageClient.query("ETH", "EUR")).thenReturn(dataPoint.toString());
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
