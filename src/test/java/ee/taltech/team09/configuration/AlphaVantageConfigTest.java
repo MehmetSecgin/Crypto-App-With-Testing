@@ -11,6 +11,7 @@ public class AlphaVantageConfigTest {
 
     @Autowired
     private AlphaVantageConfig config;
+
     @Test
     void AlphaVantageKeyTest(){
         assertEquals("DJ88371K8HCT55PW", config.getKey());

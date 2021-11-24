@@ -11,7 +11,6 @@ public class RegexFind {
 
     public String getStrings(JSONObject dataPoint, String regexPattern) {
 
-
         Pattern regex = Pattern.compile(regexPattern);
         Matcher regexMatcher = regex.matcher(dataPoint.toString());
 

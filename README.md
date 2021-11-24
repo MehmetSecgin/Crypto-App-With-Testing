@@ -1,22 +1,12 @@
-## Team Name - Scar Mini_Team09
-
----
-
-## Team Members
-
-**Mehmet Ali Seçgin , Fothul Karim Forhan**
-
----
-
 # API
 
 ## Alpha Vantage API
 
-[We're Using This Endpoint](https://www.alphavantage.co/documentation/#currency-monthly)
+[I'm Using This Endpoint](https://www.alphavantage.co/documentation/#currency-monthly)
 
-Our plan is to help the user to choose which Real World Currency to withdraw their cryptocurrency.
+The plan is to help the user to choose which Real World Currency to withdraw their cryptocurrency.
 
-We're calculating inflation in every real world currency on the cryptocurrency that the user has chosen, and give the
+The application is calculating inflation in every real world currency on the cryptocurrency that the user has chosen, and give the
 amount of change in percentages.
 
 ---
@@ -29,7 +19,7 @@ On the request of:
 http://localhost:8080/api/crypto?symbol=BTC&markets=EUR,USD,TRY,RUB
 ```
 
-We get:
+Application gets:
 
 ```
 [
